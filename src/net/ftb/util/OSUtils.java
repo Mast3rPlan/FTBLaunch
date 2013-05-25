@@ -68,11 +68,11 @@ public class OSUtils {
 	public static String getDynamicStorageLocation() {
 		switch(getCurrentOS()) {
 		case WINDOWS:
-			return System.getenv("APPDATA") + "/ftblauncher/";
+			return System.getenv("APPDATA") + "/ftblauncher_mcbp/";
 		case MACOSX:
-			return cachedUserHome + "/Library/Application Support/ftblauncher/";
+			return cachedUserHome + "/Library/Application Support/ftblauncher_mcbp/";
 		case UNIX:
-			return cachedUserHome + "/.ftblauncher/";
+			return cachedUserHome + "/.ftblauncher_mcbp/";
 		default:
 			return getDefInstallPath() + "/temp/";
 		}

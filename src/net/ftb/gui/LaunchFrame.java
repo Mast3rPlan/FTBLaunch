@@ -283,7 +283,7 @@ public class LaunchFrame extends JFrame {
 	public LaunchFrame(final int tab) {
 		setFont(new Font("a_FuturaOrto", Font.PLAIN, 12));
 		setResizable(false);
-		setTitle("Feed the Beast Launcher v" + version);
+		setTitle("Feed the Beast Launcher v" + version + " MCBP edition.");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/image/logo_ftb.png")));
 
 		panel = new JPanel();
@@ -464,7 +464,7 @@ public class LaunchFrame extends JFrame {
 		footer.add(edit);
 		footer.add(users);
 		footer.add(footerLogo);
-		footer.add(footerCreeper);
+		//footer.add(footerCreeper);
 		footer.add(launch);
 		footer.add(donate);
 		footer.add(serverbutton);

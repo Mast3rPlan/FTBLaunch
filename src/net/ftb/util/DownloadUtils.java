@@ -53,19 +53,20 @@ public class DownloadUtils extends Thread {
 			currentmd5 = md5("mcepoch1" + getTime());
 		}
 		String resolved = (downloadServers.containsKey(Settings.getSettings().getDownloadServer())) ? "http://" + downloadServers.get(Settings.getSettings().getDownloadServer()) : "http://www.creeperrepo.net";
-		resolved += "/direct/FTB2/" + currentmd5 + "/" + file;
+		resolved += "/direct/FTB2/" + file;
 		HttpURLConnection connection = null;
 		try {
 			connection = (HttpURLConnection) new URL(resolved).openConnection();
 			for(String server : downloadServers.values()) {
 				if(connection.getResponseCode() != 200 && !server.equalsIgnoreCase("www.creeperrepo.net")) {
-					resolved = "http://" + server + "/direct/FTB2/" + currentmd5 + "/" + file;
+					resolved = "http://" + server + "/direct/FTB2/" + file;
 					connection = (HttpURLConnection) new URL(resolved).openConnection();
 				}
 			}
 		} catch (IOException e) { }
 		connection.disconnect();
 		Logger.logInfo(resolved);
+		System.out.println("getCreeperhostLink() -> " + resolved);
 		return resolved; 
 	}
 
@@ -91,6 +92,8 @@ public class DownloadUtils extends Thread {
 			}
 		} catch (IOException e) { }
 		connection.disconnect();
+		
+		System.out.println("getStaticCreeperhostLink() -> " + resolved);
 		return resolved; 
 	}
 
@@ -116,7 +119,7 @@ public class DownloadUtils extends Thread {
 			if(currentmd5.isEmpty()) {
 				currentmd5 = md5("mcepoch1" + getTime());
 			}
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://www.creeperrepo.net/direct/FTB2/" + currentmd5 + "/" + file).openStream()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://mcbp.net/direct/FTB2/" + file).openStream()));
 			return !reader.readLine().toLowerCase().contains("not found");
 		} catch (Exception e) {
 			return false;
@@ -272,10 +275,10 @@ public class DownloadUtils extends Thread {
 	 */
 	@Override
 	public void run() {
-		downloadServers.put("Automatic", "www.creeperrepo.net");
+		downloadServers.put("Automatic", "mcbp.net");
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new InputStreamReader(new URL("http://www.creeperrepo.net/mirrors").openStream()));
+			in = new BufferedReader(new InputStreamReader(new URL("http://mcbp.net/mirrors.txt").openStream()));
 			String line;
 			while((line = in.readLine()) != null) {
 				String[] splitString = line.split(",");
